@@ -6,9 +6,11 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #аунтификация протестировать http://localhost:8001/api/auth/users/
+    #аунтификация протестировать http://localhost:8001/api/auth/users/ 
+    #аунтификация работает без модели из коробки 
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
+    path('api/auth/', include('djoser.urls.authtoken')),      # Получение токена (login/logout)
     
     path('api/', include('api.urls', namespace='api')),#app_name
     path("", TemplateView.as_view(template_name="base.html")),

@@ -6,6 +6,9 @@ import ListApi from './components/ListApi/ListApi'
 import CategoryApi from './components/CategoriApi/CategoryApi'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Category from './components/Category/Category';
+import LoginRegistration from './components/LoginRegistration/LoginRegistration';
+import Register from './components/Register/Register';
+
 function App() {
 
 
@@ -17,6 +20,9 @@ function App() {
         <>
           <ListApi />
           <CategoryApi />
+          <Register />
+          <LoginRegistration />
+          
         </>} />
         <Route path="/category/:slug" element={<Category />} />
       </Routes>
