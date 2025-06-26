@@ -1,6 +1,8 @@
-from rest_framework import generics
-from .models import Category, Color, Product
-from .serializers import CategorySerializer, ColorSerializer, ProductSerializer
+from rest_framework import generics, permissions
+from .models import Category, Color, Product, Comment
+from .serializers import CategorySerializer, ColorSerializer, ProductSerializer,CommentSerializers
+from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 
 # список ктегории
 class CategoryListAPIView(generics.ListAPIView):
@@ -26,3 +28,21 @@ class ProductListByCategoryAPIView(generics.ListAPIView):
     #     category_slug = self.kwargs.get('slug')
     #     return Product.objects.filter(category__slug=category_slug)
     
+    
+class CreateCommentAPIView(generics.CreateAPIView):
+    serializer_class = CommentSerializers
+    permission_classes = [permissions.IsAuthenticated]
+    
+    
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
+    def perform_create(self, serializer):
+        product_id = self.kwargs['product_id']
+        serializer.save(user=self.request.user, product_id=product_id)
+        
+
+#детальная страница
+class ProductDetailView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'id'  # или 'slug',

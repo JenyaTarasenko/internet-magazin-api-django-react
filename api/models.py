@@ -1,6 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-
+#категории товара
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
@@ -15,6 +16,7 @@ class Color(models.Model):
     def __str__(self):
         return self.name
 
+#продукты
 class Product(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
@@ -29,3 +31,12 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+#комментарий к продукту
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='comments', on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Комментарий от {self.user.username} к {self.product.name}'

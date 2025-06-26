@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Category from './components/Category/Category';
 import LoginRegistration from './components/LoginRegistration/LoginRegistration';
 import Register from './components/Register/Register';
+// import CommentForm from './components/CommentForm/CommentForm';
+import ProductDetail from './components/ProductDetail/ProductDetail';
 
 function App() {
 
@@ -22,9 +24,11 @@ function App() {
           <CategoryApi />
           <Register />
           <LoginRegistration />
+          {/* <CommentForm productId={1} /> */}
           
         </>} />
         <Route path="/category/:slug" element={<Category />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
       </Routes>
     </Router>
     </>
