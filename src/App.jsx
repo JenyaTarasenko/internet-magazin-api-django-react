@@ -10,6 +10,10 @@ import LoginRegistration from './components/LoginRegistration/LoginRegistration'
 import Register from './components/Register/Register';
 // import CommentForm from './components/CommentForm/CommentForm';
 import ProductDetail from './components/ProductDetail/ProductDetail';
+// сама карта 
+import Cart from './components/Cart/Cart';
+// компонент для отслеживания ошибок;
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 
 function App() {
 
@@ -20,7 +24,15 @@ function App() {
       <Routes>
         <Route path="/" element={
         <>
-          <ListApi />
+          {/* ErrorBoundary компонент для проверки компонентов */}
+          <ErrorBoundary>
+            <ListApi />
+          </ErrorBoundary>
+           {/* ErrorBoundary компонент для проверки компонентов */}
+          
+            
+         
+          
           <CategoryApi />
           <Register />
           <LoginRegistration />
@@ -29,6 +41,7 @@ function App() {
         </>} />
         <Route path="/category/:slug" element={<Category />} />
         <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
     </>

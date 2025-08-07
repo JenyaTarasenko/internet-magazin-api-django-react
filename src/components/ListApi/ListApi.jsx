@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
+// import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
+
+
+// компонент корзина
+import { CartContext } from '../Corzina/Corzina';
 
 
 function ListApi(){
     const [products, setProducts]= useState([]);
+    // компонент для корзины
+    const { addToCart } = useContext(CartContext);
     useEffect(() => {
         fetch('http://localhost:8001/api/projects/')
           .then(res => res.json())
@@ -23,7 +31,9 @@ function ListApi(){
             <p><strong>${product.price}</strong></p>
             <p>Color: {product.color?.name}</p>
             <p>Category: {product.category?.name}</p>
-          
+
+            {/* кнопка корзина */}
+            <button onClick={() => addToCart(product)}>Добавить в корзину</button>
           </div>
         ))}
         </>

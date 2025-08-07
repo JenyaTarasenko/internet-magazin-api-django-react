@@ -46,3 +46,23 @@ class ProductDetailView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'id'  # или 'slug',
+
+
+
+# список всех коментариев
+class ComentListAPIView(generics.ListAPIView):
+    serializer_class = CommentSerializers
+    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # GET — любое, POST — только авторизованные
+      
+      
+    # def get_queryset(self):
+    #     product_id = self.kwargs['product_id']
+    #     return Comment.objects.filter(product_id=product_id)
+    def get_queryset(self):
+        product_id = self.kwargs.get('product_id')
+        return Comment.objects.filter(product_id=product_id).order_by('-created_at')
+
+    def perform_create(self, serializer):
+        product_id = self.kwargs.get('product_id')
+        serializer.save(user=self.request.user, product_id=product_id)

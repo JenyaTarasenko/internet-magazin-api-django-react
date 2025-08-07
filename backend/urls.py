@@ -5,6 +5,7 @@ from django.conf import settings
 from django.views.generic import TemplateView
 
 urlpatterns = [
+    # http://127.0.0.1:8001/api/projects/
     path('admin/', admin.site.urls),
     #аунтификация протестировать http://localhost:8001/api/auth/users/ 
     #аунтификация работает без модели из коробки 

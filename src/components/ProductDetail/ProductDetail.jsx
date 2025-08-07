@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+// форма комментария 
 import CommentForm from '../CommentForm/CommentForm';
+// список всех комментарий продукта
+import CommentList from '../CommentList/CommentList';
 
 
 
@@ -37,6 +40,7 @@ function ProductDetail(){
 
             {/*форма коментария будет работать для авторизованых */}
             <CommentForm productId={product.id} />
+            <CommentList productId={product.id} />
         </div>
 
     );

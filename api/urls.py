@@ -1,11 +1,15 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import CategoryListAPIView,ProductListAPIView, ProductListByCategoryAPIView, CreateCommentAPIView,ProductDetailView
+from .views import CategoryListAPIView,ProductListAPIView, ProductListByCategoryAPIView, CreateCommentAPIView,ProductDetailView,ComentListAPIView
 
 
 
 app_name = 'api'
 urlpatterns = [
+    
+    
+    # http://127.0.0.1:8001/api/projects/
+    # проверка api коментариев http://localhost:8001/api/products/1/comments/
     
     #список всех проектов главная страничка Product.objects.all()
     path('projects/', ProductListAPIView.as_view(), name='api-products'),
@@ -17,4 +21,6 @@ urlpatterns = [
     path('products/<int:product_id>/comments/', CreateCommentAPIView.as_view(), name='create-comment'),
     # детальная страница  протестировать http://localhost:8001/api/products/1/ переход на страницу 
     path('products/<int:id>/', ProductDetailView.as_view(), name='create-comment'),
+    #список всех комментариев
+    path('products/<int:product_id>/', ComentListAPIView.as_view(), name="comment-list"),
 ]
