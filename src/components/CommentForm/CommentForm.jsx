@@ -27,7 +27,7 @@ function CommentForm({ productId }) {
 
     try {
       const response = await fetch(`http://localhost:8001/api/products/${productId }/comments/`, {
-        method: 'POST',
+        method: 'POST',// 'POST', метот для добавления коментариев 
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Token ${token}`

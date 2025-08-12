@@ -52,7 +52,7 @@ class ProductDetailView(generics.RetrieveAPIView):
 # список всех коментариев
 class ComentListAPIView(generics.ListAPIView):
     serializer_class = CommentSerializers
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly]  # GET — любое, POST — только авторизованные
       
       

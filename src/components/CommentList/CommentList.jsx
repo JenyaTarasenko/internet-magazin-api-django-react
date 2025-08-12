@@ -65,6 +65,14 @@ function CommentList({ productId }) {
       return;
     }
 
+    const token = localStorage.getItem('authToken');
+
+    if(!token){
+      setError("Нет токена авторизации");
+      setLoading(false);
+      return;
+    }
+    
     const controller = new AbortController();
     const signal = controller.signal;
 
@@ -73,7 +81,17 @@ function CommentList({ productId }) {
 
     console.log("Загружаю комментарии для productId:", productId);
 
-    fetch(`http://localhost:8001/api/products/${productId}/comments/`, { signal })
+
+    // path('products/<int:product_id>/comment-list/', ComentListAPIView.as_view(), name="comment-list"),
+    //путь должен совпадать 
+    fetch(`http://localhost:8001/api/products/${productId}/comment-list/`, {
+    method: 'GET',
+    signal, // просто указываем signal как свойство объекта
+    headers: {
+        'Authorization': `Token ${token}`,
+        'Content-Type': 'application/json'
+      }
+      })
       .then(res => {
         if (!res.ok) {
           // попробуй распечатать статус для отладки

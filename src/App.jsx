@@ -15,6 +15,8 @@ import Cart from './components/Cart/Cart';
 // компонент для отслеживания ошибок;
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 
+import CartIcon from './components/CartIcon/CartIcon';
+
 function App() {
 
 
@@ -29,6 +31,8 @@ function App() {
             <ListApi />
           </ErrorBoundary>
            {/* ErrorBoundary компонент для проверки компонентов */}
+
+           <CartIcon />
           
             
          
